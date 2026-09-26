@@ -1,18 +1,1895 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Project Afri-Health | Team Hub</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Project Afri-Health | Official Team Hub</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7f8;
+    color:#17323a;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button,
+a{
+    -webkit-tap-highlight-color:transparent;
+}
+
+.layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:250px;
+    background:#073b3a;
+    color:white;
+    min-height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:24px 16px;
+    z-index:20;
+}
+
+.brand{
+    font-size:20px;
+    font-weight:700;
+    padding:8px 12px 25px;
+}
+
+.brand small{
+    display:block;
+    font-size:12px;
+    font-weight:400;
+    opacity:.7;
+    margin-top:6px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.nav button{
+    border:0;
+    background:transparent;
+    color:#dceeed;
+    text-align:left;
+    padding:13px 12px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:#0c6864;
+    color:white;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    min-height:100vh;
+}
+
+.topbar{
+    background:white;
+    min-height:80px;
+    padding:18px 28px;
+    border-bottom:1px solid #e4ecee;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.topbar h1{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.muted{
+    color:#71858b;
+    font-size:13px;
+}
+
+.userbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#0c6864;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.content{
+    padding:28px;
+    max-width:1400px;
+    margin:auto;
+}
+
+/* BUTTONS */
+
+.btn{
+    border:0;
+    border-radius:8px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.primary{
+    background:#0c6864;
+    color:white;
+}
+
+.primary:hover{
+    background:#095451;
+}
+
+.secondary{
+    background:#e8f1f1;
+    color:#075553;
+}
+
+.danger{
+    background:#fce8e8;
+    color:#a52b2b;
+}
+
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.grid2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:20px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e3ebed;
+    border-radius:13px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.03);
+}
+
+.stat span{
+    display:block;
+    margin-bottom:10px;
+}
+
+.stat strong{
+    font-size:30px;
+    color:#075553;
+}
+
+.card h2{
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.card h3{
+    margin:12px 0 7px;
+}
+
+.section{
+    margin-top:20px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.section-title h2{
+    margin:0;
+}
+
+/* ITEMS */
+
+.item{
+    border:1px solid #e4ecee;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:10px;
+    background:#fbfdfd;
+}
+
+.item:last-child{
+    margin-bottom:0;
+}
+
+.item-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.item b{
+    color:#173b42;
+}
+
+.item p{
+    margin-top:8px;
+    line-height:1.55;
+}
+
+.badge{
+    display:inline-block;
+    background:#e3f2f1;
+    color:#075553;
+    border-radius:20px;
+    padding:5px 9px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* BANNER */
+
+.banner{
+    background:#e5f5f3;
+    color:#075553;
+    border:1px solid #c8e7e3;
+    padding:14px 16px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+/* FORMS */
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:14px;
+}
+
+input,
+textarea,
+select{
+    display:block;
+    width:100%;
+    margin-top:7px;
+    border:1px solid #ccd9dc;
+    border-radius:8px;
+    padding:11px;
+    background:white;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#0c6864;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:550px;
+    max-height:90vh;
+    overflow:auto;
+    border-radius:14px;
+    padding:25px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:#f1f4f4;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:20px;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:1000px){
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+        width:250px;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu{
+        display:inline-block;
+        margin-right:8px;
+    }
+
+    .topbar{
+        padding:15px;
+        align-items:flex-start;
+    }
+
+    .topbar h1{
+        display:inline;
+        font-size:20px;
+    }
+
+    .user-name{
+        display:none;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .grid,
+    .grid2{
+        grid-template-columns:1fr;
+    }
+
+}
+
+.empty{
+    text-align:center;
+    padding:30px;
+    color:#7c8d92;
+}
+
+</style>
 </head>
+
 <body>
 
-<div id="app">
-  <div class="loading">Loading Afri-Health Team Hub…</div>
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        Project Afri-Health
+        <small>Official Team Hub</small>
+    </div>
+
+    <nav class="nav">
+
+        <button data-page="dashboard" class="active">
+            Dashboard
+        </button>
+
+        <button data-page="tasks">
+            Tasks & Deliverables
+        </button>
+
+        <button data-page="meetings">
+            Meetings
+        </button>
+
+        <button data-page="documents">
+            Documents
+        </button>
+
+        <button data-page="team">
+            Team
+        </button>
+
+        <button data-page="departments">
+            Departments
+        </button>
+
+        <button data-page="announcements">
+            Announcements
+        </button>
+
+        <button data-page="activity">
+            Activity
+        </button>
+
+    </nav>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div>
+
+            <button
+                class="btn secondary mobile-menu"
+                id="menuBtn">
+                ☰
+            </button>
+
+            <h1 id="pageTitle">
+                Dashboard
+            </h1>
+
+            <div class="muted">
+                Keep the Afri-Health team aligned and moving.
+            </div>
+
+        </div>
+
+
+        <div class="userbar">
+
+            <div class="avatar">
+                F
+            </div>
+
+            <span class="user-name">
+                Faith-Tabitha Olanipekun
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <section
+        class="content"
+        id="content">
+    </section>
+
+</main>
+
 </div>
 
-<script type="module" src="js/app.js"></script>
+
+<!-- MODAL -->
+
+<div
+    class="modal"
+    id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add
+            </h2>
+
+            <button
+                class="close"
+                id="closeModal">
+                ×
+            </button>
+
+        </div>
+
+        <div id="modalBody"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   PROJECT DATA
+===================================================== */
+
+const initialData = {
+
+    tasks: [
+
+        {
+            title:"Define project workspace requirements",
+            department:"Health & Research",
+            owner:"Faith-Tabitha Olanipekun",
+            deadline:"2026-09-29",
+            status:"In Progress",
+            description:"Compile requirements for the official Afri-Health Team Hub."
+        },
+
+        {
+            title:"Create initial product user flow",
+            department:"Product & UX",
+            owner:"Netochukwu Ihuoma Chimezie",
+            deadline:"2026-09-30",
+            status:"Not Started",
+            description:"Map how members will move through the Team Hub."
+        },
+
+        {
+            title:"Document technical architecture",
+            department:"AI & Edge Technology",
+            owner:"Wisdom Ifeanyichukwu Ohagba",
+            deadline:"2026-10-01",
+            status:"Not Started",
+            description:"Define the technical structure and future integration approach."
+        },
+
+        {
+            title:"Draft sustainability and partnership notes",
+            department:"Business, Presentation & Partnerships",
+            owner:"Tadisashe Nhoro",
+            deadline:"2026-10-02",
+            status:"Not Started",
+            description:"Document sustainability, partnerships and presentation needs."
+        }
+
+    ],
+
+    meetings:[
+
+        {
+            title:"Project Afri-Health Team Meeting",
+            date:"2026-09-27T20:00",
+            agenda:"Review team structure, requirements and next deliverables.",
+            preparation:"Each department should bring its current responsibilities and proposed deliverables."
+        }
+
+    ],
+
+    members:[
+
+        {
+            name:"Faith-Tabitha Olanipekun",
+            department:"Health & Research",
+            role:"Health & Research",
+            skills:"Health research, user research, evidence, safety and ethics"
+        },
+
+        {
+            name:"Tadisashe Nhoro",
+            department:"Business, Presentation & Partnerships",
+            role:"Business & Partnerships",
+            skills:"Business model, partnerships, presentation and sustainability"
+        },
+
+        {
+            name:"Netochukwu Ihuoma Chimezie",
+            department:"Product & UX",
+            role:"Product & UX",
+            skills:"Product design, user journey, wireframes and usability"
+        },
+
+        {
+            name:"Wisdom Ifeanyichukwu Ohagba",
+            department:"AI & Edge Technology",
+            role:"AI & Edge Technology",
+            skills:"AI models, Edge AI, datasets and technical integration"
+        }
+
+    ],
+
+    announcements:[
+
+        {
+            title:"Welcome to the Team Hub",
+            message:"This is the central workspace for Project Afri-Health. Keep final tasks, deadlines, documents and decisions here.",
+            date:"2026-09-26"
+        }
+
+    ],
+
+    activity:[
+
+        {
+            text:"Project Afri-Health Team Hub initialized.",
+            date:"2026-09-26"
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
+
+let data =
+    JSON.parse(
+        localStorage.getItem("afriHealthHubData")
+    ) || initialData;
+
+
+function save(){
+
+    localStorage.setItem(
+        "afriHealthHubData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const content =
+    document.getElementById("content");
+
+const pageTitle =
+    document.getElementById("pageTitle");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const modal =
+    document.getElementById("modal");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalBody =
+    document.getElementById("modalBody");
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function esc(value){
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+function setActive(page){
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.page === page
+            );
+
+        });
+
+}
+
+
+function openModal(title,html){
+
+    modalTitle.textContent = title;
+
+    modalBody.innerHTML = html;
+
+    modal.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    modal.classList.remove("show");
+
+}
+
+
+document
+    .getElementById("closeModal")
+    .onclick = closeModal;
+
+
+modal.onclick = function(event){
+
+    if(event.target === modal){
+
+        closeModal();
+
+    }
+
+};
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function dashboard(){
+
+    pageTitle.textContent = "Dashboard";
+
+    setActive("dashboard");
+
+    const open =
+        data.tasks.filter(
+            t => t.status !== "Completed"
+        ).length;
+
+    const completed =
+        data.tasks.filter(
+            t => t.status === "Completed"
+        ).length;
+
+
+    content.innerHTML = `
+
+        <div class="banner">
+
+            <strong>Team Hub Preview</strong>
+
+            <br>
+
+            This is the central workspace for
+            Project Afri-Health.
+
+        </div>
+
+
+        <div class="grid">
+
+            <div class="card stat">
+                <span class="muted">
+                    Open tasks
+                </span>
+                <strong>
+                    ${open}
+                </strong>
+            </div>
+
+
+            <div class="card stat">
+                <span class="muted">
+                    Completed
+                </span>
+                <strong>
+                    ${completed}
+                </strong>
+            </div>
+
+
+            <div class="card stat">
+                <span class="muted">
+                    Meetings
+                </span>
+                <strong>
+                    ${data.meetings.length}
+                </strong>
+            </div>
+
+
+            <div class="card stat">
+                <span class="muted">
+                    Team members
+                </span>
+                <strong>
+                    ${data.members.length}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="grid2">
+
+            <div class="card">
+
+                <div class="section-title">
+
+                    <h2>
+                        Next meeting
+                    </h2>
+
+                    <button
+                        class="btn secondary"
+                        onclick="showPage('meetings')">
+                        View
+                    </button>
+
+                </div>
+
+
+                ${
+                    data.meetings.length
+
+                    ?
+
+                    `
+
+                    <div class="item">
+
+                        <b>
+                            ${esc(data.meetings[0].title)}
+                        </b>
+
+                        <p class="muted">
+                            ${esc(data.meetings[0].date)}
+                        </p>
+
+                        <p>
+                            ${esc(data.meetings[0].agenda)}
+                        </p>
+
+                    </div>
+
+                    `
+
+                    :
+
+                    `<div class="empty">
+                        No meetings scheduled.
+                    </div>`
+
+                }
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="section-title">
+
+                    <h2>
+                        Recent announcement
+                    </h2>
+
+                    <button
+                        class="btn secondary"
+                        onclick="showPage('announcements')">
+                        View
+                    </button>
+
+                </div>
+
+
+                ${
+                    data.announcements.length
+
+                    ?
+
+                    `
+
+                    <div class="item">
+
+                        <b>
+                            ${esc(
+                                data.announcements[
+                                    data.announcements.length-1
+                                ].title
+                            )}
+                        </b>
+
+                        <p>
+                            ${esc(
+                                data.announcements[
+                                    data.announcements.length-1
+                                ].message
+                            )}
+                        </p>
+
+                    </div>
+
+                    `
+
+                    :
+
+                    `<div class="empty">
+                        No announcements.
+                    </div>`
+
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="card section">
+
+            <div class="section-title">
+
+                <h2>
+                    Current team priority
+                </h2>
+
+                <span class="badge">
+                    Team Focus
+                </span>
+
+            </div>
+
+            <p>
+                Organize the team's responsibilities,
+                meetings, deliverables, documents and
+                decisions in one central workspace.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   TASKS
+===================================================== */
+
+function tasks(){
+
+    pageTitle.textContent =
+        "Tasks & Deliverables";
+
+    setActive("tasks");
+
+
+    content.innerHTML = `
+
+        <div class="section-title">
+
+            <h2>
+                Team Tasks
+            </h2>
+
+            <button
+                class="btn primary"
+                onclick="addTask()">
+                + Add Task
+            </button>
+
+        </div>
+
+
+        ${
+            data.tasks.length
+
+            ?
+
+            data.tasks.map((task,index)=>`
+
+                <div class="card section">
+
+                    <div class="item-head">
+
+                        <div>
+
+                            <b>
+                                ${esc(task.title)}
+                            </b>
+
+                            <div class="muted">
+                                ${esc(task.department)}
+                                ·
+                                ${esc(task.owner)}
+                            </div>
+
+                        </div>
+
+                        <span class="badge">
+                            ${esc(task.status)}
+                        </span>
+
+                    </div>
+
+                    <p>
+                        ${esc(task.description)}
+                    </p>
+
+                    <small>
+                        Deadline:
+                        ${esc(task.deadline)}
+                    </small>
+
+                </div>
+
+            `).join("")
+
+            :
+
+            `<div class="card empty">
+                No tasks yet.
+            </div>`
+
+        }
+
+    `;
+
+}
+
+
+function addTask(){
+
+    openModal(
+
+        "Add Task",
+
+        `
+
+        <form id="taskForm">
+
+            <label>
+                Task title
+                <input id="taskTitle" required>
+            </label>
+
+            <label>
+                Department
+
+                <select id="taskDepartment">
+
+                    <option>Health & Research</option>
+                    <option>AI & Edge Technology</option>
+                    <option>Product & UX</option>
+                    <option>Business, Presentation & Partnerships</option>
+
+                </select>
+
+            </label>
+
+            <label>
+                Owner
+                <input id="taskOwner">
+            </label>
+
+            <label>
+                Deadline
+                <input
+                    id="taskDeadline"
+                    type="date">
+            </label>
+
+            <label>
+                Description
+                <textarea id="taskDescription"></textarea>
+            </label>
+
+            <button
+                class="btn primary">
+                Save Task
+            </button>
+
+        </form>
+
+        `
+
+    );
+
+
+    document.getElementById("taskForm")
+        .onsubmit = function(event){
+
+            event.preventDefault();
+
+
+            data.tasks.push({
+
+                title:
+                    document.getElementById("taskTitle").value,
+
+                department:
+                    document.getElementById("taskDepartment").value,
+
+                owner:
+                    document.getElementById("taskOwner").value,
+
+                deadline:
+                    document.getElementById("taskDeadline").value,
+
+                description:
+                    document.getElementById("taskDescription").value,
+
+                status:"Not Started"
+
+            });
+
+
+            save();
+
+            closeModal();
+
+            tasks();
+
+        };
+
+}
+
+
+/* =====================================================
+   MEETINGS
+===================================================== */
+
+function meetings(){
+
+    pageTitle.textContent =
+        "Meetings";
+
+    setActive("meetings");
+
+
+    content.innerHTML = `
+
+        <div class="section-title">
+
+            <h2>
+                Meetings
+            </h2>
+
+            <button
+                class="btn primary"
+                onclick="addMeeting()">
+                + Add Meeting
+            </button>
+
+        </div>
+
+
+        ${
+            data.meetings.map(meeting=>`
+
+                <div class="card section">
+
+                    <div class="item-head">
+
+                        <b>
+                            ${esc(meeting.title)}
+                        </b>
+
+                        <span class="badge">
+                            ${esc(meeting.date)}
+                        </span>
+
+                    </div>
+
+                    <p>
+                        ${esc(meeting.agenda)}
+                    </p>
+
+                    <p class="muted">
+                        Preparation:
+                        ${esc(meeting.preparation)}
+                    </p>
+
+                </div>
+
+            `).join("")
+
+            ||
+
+            `<div class="card empty">
+                No meetings scheduled.
+            </div>`
+
+        }
+
+    `;
+
+}
+
+
+function addMeeting(){
+
+    openModal(
+
+        "Add Meeting",
+
+        `
+
+        <form id="meetingForm">
+
+            <label>
+                Meeting title
+                <input id="meetingTitle" required>
+            </label>
+
+            <label>
+                Date & time
+                <input
+                    id="meetingDate"
+                    type="datetime-local"
+                    required>
+            </label>
+
+            <label>
+                Meeting link
+                <input
+                    id="meetingLink"
+                    placeholder="Google Meet / Teams / Zoom">
+            </label>
+
+            <label>
+                Agenda
+                <textarea id="meetingAgenda"></textarea>
+            </label>
+
+            <label>
+                Preparation
+                <textarea id="meetingPreparation"></textarea>
+            </label>
+
+            <button
+                class="btn primary">
+                Save Meeting
+            </button>
+
+        </form>
+
+        `
+
+    );
+
+
+    document.getElementById("meetingForm")
+        .onsubmit = function(event){
+
+            event.preventDefault();
+
+
+            data.meetings.push({
+
+                title:
+                    document.getElementById("meetingTitle").value,
+
+                date:
+                    document.getElementById("meetingDate").value,
+
+                link:
+                    document.getElementById("meetingLink").value,
+
+                agenda:
+                    document.getElementById("meetingAgenda").value,
+
+                preparation:
+                    document.getElementById("meetingPreparation").value
+
+            });
+
+
+            save();
+
+            closeModal();
+
+            meetings();
+
+        };
+
+}
+
+
+/* =====================================================
+   DOCUMENTS
+===================================================== */
+
+function documents(){
+
+    pageTitle.textContent =
+        "Documents";
+
+    setActive("documents");
+
+
+    content.innerHTML = `
+
+        <div class="card">
+
+            <h2>
+                Project Documents
+            </h2>
+
+            <p class="muted">
+                Document storage will be connected later.
+            </p>
+
+            <div class="grid2 section">
+
+                <div class="item">
+                    <b>Health & Research</b>
+                    <p>
+                        Research, health evidence,
+                        user research and governance.
+                    </p>
+                </div>
+
+                <div class="item">
+                    <b>AI & Edge Technology</b>
+                    <p>
+                        Architecture, datasets,
+                        models and technical documents.
+                    </p>
+                </div>
+
+                <div class="item">
+                    <b>Product & UX</b>
+                    <p>
+                        User flows, wireframes,
+                        prototypes and testing.
+                    </p>
+                </div>
+
+                <div class="item">
+                    <b>Business & Partnerships</b>
+                    <p>
+                        Business model, pitch,
+                        partnerships and sustainability.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   TEAM
+===================================================== */
+
+function team(){
+
+    pageTitle.textContent =
+        "Team";
+
+    setActive("team");
+
+
+    content.innerHTML = `
+
+        <div class="section-title">
+
+            <h2>
+                Team Directory
+            </h2>
+
+            <button
+                class="btn primary"
+                onclick="addMember()">
+                + Add Member
+            </button>
+
+        </div>
+
+
+        <div class="grid">
+
+            ${
+                data.members.map(member=>`
+
+                    <div class="card">
+
+                        <div class="avatar">
+                            ${esc(member.name.charAt(0))}
+                        </div>
+
+                        <h3>
+                            ${esc(member.name)}
+                        </h3>
+
+                        <span class="badge">
+                            ${esc(member.department)}
+                        </span>
+
+                        <p class="muted">
+                            ${esc(member.role)}
+                        </p>
+
+                        <p>
+                            ${esc(member.skills)}
+                        </p>
+
+                    </div>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+function addMember(){
+
+    openModal(
+
+        "Add Team Member",
+
+        `
+
+        <form id="memberForm">
+
+            <label>
+                Name
+                <input id="memberName" required>
+            </label>
+
+            <label>
+                Department
+
+                <select id="memberDepartment">
+
+                    <option>Health & Research</option>
+                    <option>AI & Edge Technology</option>
+                    <option>Product & UX</option>
+                    <option>Business, Presentation & Partnerships</option>
+
+                </select>
+
+            </label>
+
+            <label>
+                Role
+                <input id="memberRole">
+            </label>
+
+            <label>
+                Skills
+                <input id="memberSkills">
+            </label>
+
+            <button class="btn primary">
+                Save Member
+            </button>
+
+        </form>
+
+        `
+
+    );
+
+
+    document.getElementById("memberForm")
+        .onsubmit = function(event){
+
+            event.preventDefault();
+
+
+            data.members.push({
+
+                name:
+                    document.getElementById("memberName").value,
+
+                department:
+                    document.getElementById("memberDepartment").value,
+
+                role:
+                    document.getElementById("memberRole").value,
+
+                skills:
+                    document.getElementById("memberSkills").value
+
+            });
+
+
+            save();
+
+            closeModal();
+
+            team();
+
+        };
+
+}
+
+
+/* =====================================================
+   DEPARTMENTS
+===================================================== */
+
+function departments(){
+
+    pageTitle.textContent =
+        "Departments";
+
+    setActive("departments");
+
+
+    const list = [
+
+        [
+            "AI & Edge Technology",
+            "AI model development, Edge AI, datasets, evaluation and technical integration."
+        ],
+
+        [
+            "Health & Research",
+            "Healthcare research, evidence, target users, safety, ethics and validation."
+        ],
+
+        [
+            "Product & UX",
+            "Product features, user journeys, interface design, usability and prototype."
+        ],
+
+        [
+            "Business, Presentation & Partnerships",
+            "Business model, stakeholders, partnerships, sustainability and presentations."
+        ]
+
+    ];
+
+
+    content.innerHTML = `
+
+        <div class="grid">
+
+            ${
+                list.map(item=>`
+
+                    <div class="card">
+
+                        <span class="badge">
+                            Department
+                        </span>
+
+                        <h2>
+                            ${esc(item[0])}
+                        </h2>
+
+                        <p>
+                            ${esc(item[1])}
+                        </p>
+
+                    </div>
+
+                `).join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ANNOUNCEMENTS
+===================================================== */
+
+function announcements(){
+
+    pageTitle.textContent =
+        "Announcements";
+
+    setActive("announcements");
+
+
+    content.innerHTML = `
+
+        <div class="section-title">
+
+            <h2>
+                Announcements
+            </h2>
+
+            <button
+                class="btn primary"
+                onclick="addAnnouncement()">
+                + New Announcement
+            </button>
+
+        </div>
+
+
+        ${
+            data.announcements
+                .slice()
+                .reverse()
+                .map(item=>`
+
+                    <div class="card section">
+
+                        <div class="item-head">
+
+                            <b>
+                                ${esc(item.title)}
+                            </b>
+
+                            <small>
+                                ${esc(item.date)}
+                            </small>
+
+                        </div>
+
+                        <p>
+                            ${esc(item.message)}
+                        </p>
+
+                    </div>
+
+                `).join("")
+
+            ||
+
+            `<div class="card empty">
+                No announcements.
+            </div>`
+
+        }
+
+    `;
+
+}
+
+
+function addAnnouncement(){
+
+    openModal(
+
+        "New Announcement",
+
+        `
+
+        <form id="announcementForm">
+
+            <label>
+                Title
+                <input id="announcementTitle" required>
+            </label>
+
+            <label>
+                Message
+
+                <textarea
+                    id="announcementMessage"
+                    required>
+                </textarea>
+
+            </label>
+
+            <button class="btn primary">
+                Publish
+            </button>
+
+        </form>
+
+        `
+
+    );
+
+
+    document
+        .getElementById("announcementForm")
+        .onsubmit = function(event){
+
+            event.preventDefault();
+
+
+            data.announcements.push({
+
+                title:
+                    document.getElementById(
+                        "announcementTitle"
+                    ).value,
+
+                message:
+                    document.getElementById(
+                        "announcementMessage"
+                    ).value,
+
+                date:
+                    new Date().toLocaleDateString()
+
+            });
+
+
+            save();
+
+            closeModal();
+
+            announcements();
+
+        };
+
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+function activity(){
+
+    pageTitle.textContent =
+        "Activity";
+
+    setActive("activity");
+
+
+    content.innerHTML = `
+
+        <div class="card">
+
+            <h2>
+                Recent Activity
+            </h2>
+
+            ${
+                data.activity
+                    .slice()
+                    .reverse()
+                    .map(item=>`
+
+                        <div class="item">
+
+                            <b>
+                                ${esc(item.text)}
+                            </b>
+
+                            <small class="muted">
+                                ${esc(item.date)}
+                            </small>
+
+                        </div>
+
+                    `).join("")
+
+                ||
+
+                `<div class="empty">
+                    No activity yet.
+                </div>`
+
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showPage(page){
+
+    const pages = {
+
+        dashboard,
+        tasks,
+        meetings,
+        documents,
+        team,
+        departments,
+        announcements,
+        activity
+
+    };
+
+
+    if(pages[page]){
+
+        pages[page]();
+
+    }
+
+}
+
+
+document
+    .querySelectorAll(".nav button")
+    .forEach(button=>{
+
+        button.onclick = function(){
+
+            showPage(
+                this.dataset.page
+            );
+
+            sidebar.classList.remove("open");
+
+        };
+
+    });
+
+
+document
+    .getElementById("menuBtn")
+    .onclick = function(){
+
+        sidebar.classList.toggle("open");
+
+    };
+
+
+/* START */
+
+dashboard();
+
+</script>
 
 </body>
 </html>
