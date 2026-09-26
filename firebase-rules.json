@@ -1,0 +1,11 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "tasks": { ".indexOn": ["deadline", "status", "department"] },
+    "meetings": { ".indexOn": ["date"] },
+    "members": { ".indexOn": ["department"] },
+    "announcements": { ".indexOn": ["createdAt"] },
+    "activity": { ".indexOn": ["createdAt"] }
+  }
+}
